@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript">
+$('#tb_report').bootstrapTable({
+	url : '/GroupColumns/GetReport', //请求后台的URL（*）
+	method : 'get', //请求方式（*）
+	toolbar : '#toolbar', //工具按钮用哪个容器
+	striped : true, //是否显示行间隔色
+	cache : false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+	pagination : true, //是否显示分页（*）
+	sortOrder : "asc", //排序方式
+	queryParams : oTableInit.queryParams,//传递参数（*）
+	sidePagination : "server", //分页方式：client客户端分页，server服务端分页（*）
+	pageNumber : 1, //初始化加载第一页，默认第一页
+	pageSize : 10, //每页的记录行数（*）
+	pageList : [ 10, 25, 50, 100 ], //可供选择的每页的行数（*）
+});
+</script>
+<body>
+		<table id="tb_report">
+			<thead>
+				<tr>
+					<th colspan="4" data-valign="middle" data-align="center">第一季度</th>
+					<th colspan="4" data-valign="middle" data-align="center">第二季度</th>
+					<th colspan="4" data-valign="middle" data-align="center">第三季度</th>
+					<th colspan="4" data-valign="middle" data-align="center">第四季度</th>
+					<th data-field="TotalCount" rowspan="2" data-valign="middle"
+						data-align="center">年度汇总</th>
+				</tr>
+				<tr>
+					<th data-field="JanCount" data-align="center">一月</th>
+					<th data-field="FebCount" data-align="center">二月</th>
+					<th data-field="MarCount" data-align="center">三月</th>
+					<th data-field="FirstQuarter" data-align="center">第一季度</th>
+
+					<th data-field="AprCount" data-align="center">四月</th>
+					<th data-field="MayCount" data-align="center">五月</th>
+					<th data-field="JunCount" data-align="center">六月</th>
+					<th data-field="SecondQuarter" data-align="center">第二季度</th>
+
+					<th data-field="JulCount" data-align="center">七月</th>
+					<th data-field="AguCount" data-align="center">八月</th>
+					<th data-field="SepCount" data-align="center">九月</th>
+					<th data-field="ThirdQuarter" data-align="center">第三季度</th>
+
+					<th data-field="OctCount" data-align="center">十月</th>
+					<th data-field="NovCount" data-align="center">十一月</th>
+					<th data-field="DecCount" data-align="center">十二月</th>
+					<th data-field="ForthQuarter" data-align="center">第四季度</th>
+
+				</tr>
+			</thead>
+		</table>
+		
+		
+		<div class="row clearfix">
+            <c:forEach items="${listFormData}" var="list">
+                <div class="col-md-6 column" style="height:520px;">
+                    <table class="table table-bordered" style="height:350px;border:2px solid black">    
+                        <thead>
+                        </thead>
+                        <tbody>
+
+                                <tr>
+                                    <td class="tdOne">课程名称</td>
+                                    <td class="tdTwo" colspan="2"></td>
+                                    <td class="tdOne">任课老师</td>
+                                    <td class="tdTwo" colspan="2"></td>
+                                </tr>
+
+                            <tr>
+                                <td class="tdOne">专业班级</td>
+                                <td class="tdTwo" colspan="2"></td>
+                                <td class="tdOne">考试日期</td>
+                                <td class="tdTwo" colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td class="tdOne">实考人数</td>
+                                <td class="tdOne"></td>
+                                <td class="tdOne">缺考人数</td>
+                                <td class="tdOne"></td>
+                                <td class="tdOne">学生类别</td>
+                                <td class="tdOne"></td>
+                            </tr>
+                            <tr>
+                                <td class="tdOne">命题形式</td>
+                                <td class="tdOne"></td>
+                                <td class="tdOne">命题负责人</td>
+                                <td class="tdOne"></td>
+                                <td class="tdOne">考试形式</td>
+                                <td class="tdOne"></td>
+                            </tr>
+                            <tr>
+                                <td class="tdOne">考试用卷</td>
+                                <td class="tdOne"></td>
+                                <td class="tdOne">考试用时</td>
+                                <td class="tdOne"></td>
+                                <td class="tdOne">评卷方式</td>
+                                <td class="tdOne"></td>
+                            </tr>
+
+                            <tr style="height:2px;border:none;border-top:2px solid black;">
+                                <td colspan="6" class="text-center">以 下 是 考 试 成 绩 主 要 指 标 统 计 分 析</td>
+                            </tr>
+
+                            <tr>
+                                <td class="tdOne" style="vertical-align: middle;">分数值X</td>
+                                <td class="tdOne">优秀  <br/>100≥X≥90</td>
+                                <td class="tdOne">良好<br/>90＞X≥80</td>
+                                <td class="tdOne">中等<br/>80＞X≥70</td>
+                                <td class="tdOne">及格<br/>70＞X≥60</td>
+                                <td class="tdOne">不及格<br/>60＞X≥0</td>
+                            </tr>
+                            <tr>
+                                <td class="tdOne">分布人数</td>
+                                <td class="tdOne">${list.excellentNum}</td>
+                                <td class="tdOne">${list.goodNum}</td>
+                                <td class="tdOne">${list.middleNum}</td>
+                                <td class="tdOne">${list.passNum}</td>
+                                <td class="tdOne">${list.failNum}</td>
+                            </tr>
+                            <tr>
+                                <td class="tdOne">比例(%)</td>
+                                <td class="tdOne">${list.excellentScale}</td>
+                                <td class="tdOne">${list.goodScale}</td>
+                                <td class="tdOne">${list.middleScale}</td>
+                                <td class="tdOne">${list.passScale}</td>
+                                <td class="tdOne">${list.failScale}</td>
+                            </tr>
+
+
+
+                        </tbody>
+                    </table>
+
+                    <table class="table table-striped table-hover" style="height:143px;border:2px solid black">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="tdFive">平均分数 </td>
+                                <td class="tdFive">平均离差</td>
+                                <td class="tdFive">标准差S</td>
+                                <td class="tdFive">极差R</td>
+                                <td class="tdFive">合格率r</td>
+                            </tr>
+
+                            <tr style="height:30px;">
+                                <td class="tdFive">${list.avgScore}</td>
+                                <td class="tdFive">${list.avgDispersion}</td>
+                                <td class="tdFive">${list.standardDT}</td>
+                                <td class="tdFive">${list.range}</td>
+                                <td class="tdFive">${list.percentPass}</td>
+                            </tr>
+
+                            <tr >
+                                <td class="tdFive">评卷单位</td>
+                                <td class="tdFive">评卷负责人</td>
+                                <td class="tdFive">系(部)主任</td>
+                                <td class="tdFive">主管院长</td>
+                                <td class="tdFive" >分析时间</td>
+                            </tr>
+                            <tr style="height:30px;">
+                                <td class="tdFive"> </td>
+                                <td class="tdFive"></td>
+                                <td class="tdFive"></td>
+                                <td class="tdFive"></td>
+                                <td class="tdFive" ></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </c:forEach>
+            <div class="col-md-6 column" style="">
+                <table class="table table-striped table-hover" style="height:520px;border:2px solid black">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2">试 卷 综 合 分 析 报 告 及 改 进 措 施</td>                      
+                        </tr>
+                        <tr>
+                            <td  class="tdFive"><br/>试卷<br/>命题<br/>质量<br/>总体<br/>评价<br/>分析<br/></td>    
+                            <td class=""></td>                  
+                        </tr>
+                        <tr>
+                            <td  class="tdFive"><br/>学生<br/>考试<br/>成绩<br/>总体<br/>评价<br/>分析<br/></td>    
+                            <td class=""></td>                  
+                        </tr>
+                        <tr>
+                            <td  class="tdFive"><br/>存在<br/>问题<br/>及其<br/>改进<br/>措施<br/>方案<br/></td>    
+                            <td class=""></td>                  
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+</body>
+</html>
